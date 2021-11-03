@@ -33,7 +33,7 @@ const App = () => {
   return (
     <Timers>
       {timers.map((timer, i) => (
-        <TimerProvider key={i}>
+        <TimerProvider key={timer.title}>
           <Timer>
             <TimerTitle>{timer.title}</TimerTitle>
             {timer.C}

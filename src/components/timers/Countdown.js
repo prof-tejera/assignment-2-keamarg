@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
+import { TimerContext } from "../../TimerProvider";
 import styled from "styled-components";
 import Panel from "../generic/Panel";
 import Settings from "../generic/Settings";
 import Button from "../generic/Button";
 import DisplayTime from "../generic/DisplayTime";
 import { COLORS } from "../../utils/helpers";
-import { TimerContext } from "../../TimerProvider";
 
 const UpperPanel = styled.div`
   position: relative;
@@ -60,17 +60,17 @@ const CountDown = () => {
   const timerType = "Countdown";
   const { btnState, setBtnState } = useContext(TimerContext);
   // const [btnState, setBtnState] = useState(true);
-  const sendBtnState = (btnState) => {
-    console.log("btnState" + btnState);
-    setBtnState(btnState);
-  };
+  // const sendBtnState = (btnState) => {
+  //   console.log("btnState" + btnState);
+  //   setBtnState(btnState);
+  // };
   const { settingsState, setSettingsState } = useContext(TimerContext);
 
   // const [settingsState, setSettingsState] = useState(false);
-  const sendSettingsState = (settingsState) => {
-    console.log("settingsState" + settingsState);
-    setSettingsState(settingsState);
-  };
+  // const sendSettingsState = (settingsState) => {
+  //   console.log("settingsState" + settingsState);
+  //   setSettingsState(settingsState);
+  // };
 
   if (!settingsState) {
     return (
@@ -81,8 +81,8 @@ const CountDown = () => {
             styleName="settingsBtn"
             btnState={btnState}
             settingsState={settingsState}
-            sendBtnState={sendBtnState}
-            sendSettingsState={sendSettingsState}
+            sendBtnState={setBtnState}
+            sendSettingsState={setSettingsState}
           ></Button>
           <i className={`bi bi-stopwatch icon ${btnState}`}></i>
         </UpperPanel>
@@ -99,13 +99,13 @@ const CountDown = () => {
                 styleName="col-5"
                 btnState={btnState}
                 type={btnState ? "Start" : "Stop"}
-                sendBtnState={sendBtnState}
+                sendBtnState={setBtnState}
               ></Button>
               <Button
                 styleName="col-5"
                 btnState={btnState}
                 type="Reset"
-                sendBtnState={sendBtnState}
+                sendBtnState={setBtnState}
               ></Button>
             </div>
           </div>
@@ -121,8 +121,8 @@ const CountDown = () => {
           styleName="settingsBtn"
           btnState={btnState}
           settingsState={settingsState}
-          sendBtnState={sendBtnState}
-          sendSettingsState={sendSettingsState}
+          sendBtnState={setBtnState}
+          sendSettingsState={setSettingsState}
         ></Button>
         <Settings
           styleName="p-2"
