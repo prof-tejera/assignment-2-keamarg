@@ -11,14 +11,14 @@ const Container = styled.div`
       ? COLORS.stopwatch
       : props.type === "Countdown"
       ? COLORS.countdown
-      : props.type === "Xy"
+      : props.type === "XY"
       ? COLORS.xy
       : COLORS.tabata};
   // color: var(--blue);
   // padding: 2rem 0 2rem 0;
   // line-height: 30px;
   font-size: 2rem;
-  border-radius: 0.5rem;
+  border-radius: 0rem 0rem 0.3rem 0.3rem;
 `;
 
 const Panel = (props) => {

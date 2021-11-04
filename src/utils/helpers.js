@@ -11,4 +11,5 @@ export const COLORS = {
   stop: "#DB4E4E",
   reset: "#2F333B",
   text: "#FAF9F6",
+  nav: "#231F20",
 };

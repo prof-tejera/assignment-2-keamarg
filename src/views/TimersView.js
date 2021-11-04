@@ -6,6 +6,8 @@ import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";
 import Tabata from "../components/timers/Tabata";
 import TimerProvider from "../TimerProvider";
+import Navbar from "../components/generic/Navbar";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Timers = styled.div`
   display: flex;
@@ -13,33 +15,42 @@ const Timers = styled.div`
   align-items: center;
 `;
 
-const Timer = styled.div`
-  border: 1px solid gray;
-  padding: 20px;
-  margin: 10px;
-  font-size: 1.5rem;
-`;
-
-const TimerTitle = styled.div``;
-
 const App = () => {
-  const timers = [
-    { title: "Stopwatch", C: <Stopwatch /> },
-    { title: "Countdown", C: <Countdown /> },
-    { title: "XY", C: <XY /> },
-    { title: "Tabata", C: <Tabata /> },
+  const routes = [
+    {
+      path: "/",
+      component: Stopwatch,
+    },
+    {
+      path: "/Stopwatch",
+      component: Stopwatch,
+    },
+    {
+      path: "/Countdown",
+      component: Countdown,
+    },
+    {
+      path: "/XY",
+      component: XY,
+    },
+    {
+      path: "/Tabata",
+      component: Tabata,
+    },
   ];
 
   return (
     <Timers>
-      {timers.map((timer, i) => (
-        <TimerProvider key={timer.title}>
-          <Timer>
-            <TimerTitle>{timer.title}</TimerTitle>
-            {timer.C}
-          </Timer>
-        </TimerProvider>
-      ))}
+      <TimerProvider>
+        <Router>
+          <Navbar />
+          <Switch>
+            {routes.map(({ path, component }, key) => (
+              <Route exact path={path} component={component} key={key} />
+            ))}
+          </Switch>
+        </Router>
+      </TimerProvider>
     </Timers>
   );
 };

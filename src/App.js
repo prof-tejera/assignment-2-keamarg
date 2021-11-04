@@ -14,7 +14,6 @@ const Container = styled.div`
 
 const App = () => {
   return (
-    // <AppProvider>
     <Container>
       <Router>
         <nav>
@@ -37,7 +36,6 @@ const App = () => {
         </Switch>
       </Router>
     </Container>
-    // </AppProvider>
   );
 };
 

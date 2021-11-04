@@ -7,6 +7,9 @@ import Button from "../generic/Button";
 import DisplayTime from "../generic/DisplayTime";
 import { COLORS } from "../../utils/helpers";
 
+const Title = styled.h1`
+  color: ${COLORS.text};
+`;
 const UpperPanel = styled.div`
   position: relative;
   height: 15rem;
@@ -40,7 +43,6 @@ const UpperPanel = styled.div`
     font-size: 10rem;
     opacity: 40%;
     display: block;
-    padding-top: 2rem;
   }
   .settingsBtn {
     z-index: 1;
@@ -58,24 +60,14 @@ const LowerPanel = styled.div`
 
 const Stopwatch = () => {
   const timerType = "Stopwatch";
-  //const [btnState, setBtnState] = useState(true);
   const { btnState, setBtnState } = useContext(TimerContext);
-  // const sendBtnState = (btnState) => {
-  //   console.log("btnState" + btnState);
-  //   setBtnState(btnState);
-  // };
-  // const [settingsState, setSettingsState] = useState(false);
   const { settingsState, setSettingsState } = useContext(TimerContext);
-
-  // const sendSettingsState = (settingsState) => {
-  //   console.log("settingsState" + settingsState);
-  //   setSettingsState(settingsState);
-  // };
 
   if (!settingsState) {
     return (
       <Panel timerType={timerType}>
         <UpperPanel className="text-center">
+          <Title>{timerType}</Title>
           <Button
             type={settingsState ? "exitSettings" : "enterSettings"}
             styleName="settingsBtn"

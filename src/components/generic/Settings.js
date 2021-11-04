@@ -21,6 +21,7 @@ const SetTime = styled.input`
 const Credentials = styled.p`
   font-size: 0.8rem;
   color: ${COLORS.text};
+  padding-top: 0.5rem;
 `;
 
 const Settings = (props) => {
