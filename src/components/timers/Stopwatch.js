@@ -60,23 +60,23 @@ const LowerPanel = styled.div`
 
 const Stopwatch = () => {
   const timerType = "Stopwatch";
-  const { btnState, setBtnState } = useContext(TimerContext);
-  const { settingsState, setSettingsState } = useContext(TimerContext);
+  const { stopwatchTimer, setStopwatchTimer } = useContext(TimerContext);
+  const { stopwatchSettings, setStopwatchSettings } = useContext(TimerContext);
 
-  if (!settingsState) {
+  if (!stopwatchSettings) {
     return (
       <Panel timerType={timerType}>
         <UpperPanel className="text-center">
-          <Title>{timerType}</Title>
+          <Title>Stopwatch</Title>
           <Button
-            type={settingsState ? "exitSettings" : "enterSettings"}
+            type={stopwatchSettings ? "exitSettings" : "enterSettings"}
             styleName="settingsBtn"
-            btnState={btnState}
-            settingsState={settingsState}
-            sendBtnState={setBtnState}
-            sendSettingsState={setSettingsState}
+            btnState={stopwatchTimer}
+            settingsState={stopwatchSettings}
+            sendBtnState={setStopwatchTimer}
+            sendSettingsState={setStopwatchSettings}
           ></Button>
-          <i className={`bi bi-stopwatch stopwatch ${btnState}`}></i>
+          <i className={`bi bi-stopwatch stopwatch ${stopwatchTimer}`}></i>
         </UpperPanel>
         <LowerPanel className="d-flex align-items-center">
           <div className="container">
@@ -89,15 +89,15 @@ const Stopwatch = () => {
             <div className="row justify-content-around">
               <Button
                 styleName="col-5"
-                btnState={btnState}
-                type={btnState ? "Start" : "Stop"}
-                sendBtnState={setBtnState}
+                btnState={stopwatchTimer}
+                type={stopwatchTimer ? "Start" : "Stop"}
+                sendBtnState={setStopwatchTimer}
               ></Button>
               <Button
                 styleName="col-5"
-                btnState={btnState}
+                btnState={stopwatchTimer}
                 type="Reset"
-                sendBtnState={setBtnState}
+                sendBtnState={setStopwatchTimer}
               ></Button>
             </div>
           </div>
@@ -109,12 +109,12 @@ const Stopwatch = () => {
     <Panel timerType={timerType}>
       <UpperPanel className="text-center d-flex align-items-center justify-content-center">
         <Button
-          type={settingsState ? "exitSettings" : "enterSettings"}
+          type={stopwatchSettings ? "exitSettings" : "enterSettings"}
           styleName="settingsBtn"
-          btnState={btnState}
-          settingsState={settingsState}
-          sendBtnState={setBtnState}
-          sendSettingsState={setSettingsState}
+          btnState={stopwatchTimer}
+          settingsState={stopwatchSettings}
+          sendBtnState={setStopwatchTimer}
+          sendSettingsState={setStopwatchSettings}
         ></Button>
         <Settings styleName="p-2" type="Stopwatch"></Settings>
       </UpperPanel>
