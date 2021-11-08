@@ -22,6 +22,10 @@ const App = () => {
       component: Stopwatch,
     },
     {
+      path: "/assignment-2-keamarg",
+      component: Stopwatch,
+    },
+    {
       path: "/Stopwatch",
       component: Stopwatch,
     },

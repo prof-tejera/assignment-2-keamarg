@@ -31,8 +31,8 @@ const Button = (props) => {
   };
   const changeBtnState = () => {
     props.type === "Reset"
-      ? props.sendBtnState(true)
-      : props.sendBtnState(!props.btnState);
+      ? props.setBtnState(true)
+      : props.setBtnState(!props.btnState);
   };
   const changeSettingsState = () => {
     props.sendSettingsState(!props.settingsState);

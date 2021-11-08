@@ -41,7 +41,7 @@ const Settings = (props) => {
           placeholder={props.placeholder}
         ></SetTime>
       ) : null}
-      {props.type === "Xy" || props.type === "Tabata" ? (
+      {props.type === "XY" || props.type === "Tabata" ? (
         <SetTime
           type={props.type}
           className={props.styleName}

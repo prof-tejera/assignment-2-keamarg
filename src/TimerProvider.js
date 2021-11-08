@@ -14,6 +14,12 @@ const TimerProvider = ({ children }) => {
   const [settingsState, setSettingsState] = useState(false);
   const [stopwatchTimer, setStopwatchTimer] = useState(true);
   const [stopwatchSettings, setStopwatchSettings] = useState(false);
+  const [countdownTimer, setCountdownTimer] = useState(true);
+  const [countdownSettings, setCountdownSettings] = useState(false);
+  const [xyTimer, setXyTimer] = useState(true);
+  const [xySettings, setXySettings] = useState(false);
+  const [tabataTimer, setTabataTimer] = useState(true);
+  const [tabataSettings, setTabataSettings] = useState(false);
 
   return (
     <TimerContext.Provider
@@ -26,6 +32,18 @@ const TimerProvider = ({ children }) => {
         setStopwatchTimer,
         stopwatchSettings,
         setStopwatchSettings,
+        countdownTimer,
+        setCountdownTimer,
+        countdownSettings,
+        setCountdownSettings,
+        xyTimer,
+        setXyTimer,
+        xySettings,
+        setXySettings,
+        tabataTimer,
+        setTabataTimer,
+        tabataSettings,
+        setTabataSettings,
       }}
     >
       {children}
