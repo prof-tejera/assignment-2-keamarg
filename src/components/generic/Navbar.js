@@ -69,7 +69,7 @@ const links = [
 ];
 
 const Navbar = () => {
-  const { time, setTime } = useContext(TimerContext);
+  const { setTime } = useContext(TimerContext);
 
   const handleClick = () => {
     setTime(0);

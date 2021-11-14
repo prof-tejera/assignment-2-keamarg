@@ -73,7 +73,7 @@ const SettingsPanel = styled.div`
 `;
 
 const Timer = (props) => {
-  const { time, setTime } = useContext(TimerContext);
+  const { time } = useContext(TimerContext);
   const { stopwatchTimer, setStopwatchTimer } = useContext(TimerContext);
   const { stopwatchSettings, setStopwatchSettings } = useContext(TimerContext);
   const { countdownTimer, setCountdownTimer } = useContext(TimerContext);
