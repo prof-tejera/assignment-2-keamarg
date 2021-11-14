@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TimerContext } from "../../TimerProvider";
 import { NavLink } from "react-router-dom";
 import { COLORS } from "../../utils/helpers";
 import styled from "styled-components";
@@ -68,11 +69,19 @@ const links = [
 ];
 
 const Navbar = () => {
+  const { time, setTime } = useContext(TimerContext);
+
+  const handleClick = () => {
+    setTime(0);
+  };
+
   return (
     <NavList>
       {links.map((link, index) => (
         <NavLink key={index} to={link.path} exact activeClassName="current">
-          <li className={link.name}>{link.name}</li>
+          <li className={link.name} onClick={handleClick}>
+            {link.name}
+          </li>
         </NavLink>
       ))}
     </NavList>

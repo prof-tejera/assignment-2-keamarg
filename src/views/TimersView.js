@@ -46,14 +46,14 @@ const App = () => {
   return (
     <Timers>
       <Router>
-        <Navbar />
-        <Switch>
-          <TimerProvider>
+        <TimerProvider>
+          <Navbar />
+          <Switch>
             {routes.map(({ path, component }, key) => (
               <Route exact path={path} component={component} key={key} />
             ))}
-          </TimerProvider>
-        </Switch>
+          </Switch>
+        </TimerProvider>
       </Router>
     </Timers>
   );

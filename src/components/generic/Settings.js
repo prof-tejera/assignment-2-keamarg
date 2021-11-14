@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import { timerValue } from "../../utils/helpers.js";
 import PropTypes from "prop-types";
 import { COLORS } from "../../utils/helpers.js";
+import React, { useContext } from "react";
+import { TimerContext } from "../../TimerProvider";
 
-const SetTime = styled.input`
+const SetInput = styled.input`
   // border: 1px solid black;
   color: ${(props) =>
     props.type === "Stopwatch"
@@ -15,7 +18,6 @@ const SetTime = styled.input`
   font-size: 0.8rem;
   border-radius: 0.5rem;
   border: 0px;
-  width: 100%;
 `;
 
 const Credentials = styled.p`
@@ -24,36 +26,91 @@ const Credentials = styled.p`
   padding-top: 0.5rem;
 `;
 
+const Text = styled.p`
+  font-size: 1rem;
+  color: ${COLORS.text};
+  padding-top: 0.5rem;
+  margin-block-start: 0;
+  margin-block-end: 0;
+`;
+
 const Settings = (props) => {
   Settings.defaultProps = {
-    type: "Countdown",
+    // type: "Countdown",
     timerType: "Countdown",
-    placeholder: "input",
-    placeholderRounds: "input",
-    placeholderRest: "input",
+    placeholder: "hh:mm:ss",
+    placeholderRounds: "hh:mm:ss",
+    placeholderRest: "hh:mm:ss",
   };
+
+  const { time, setTime } = useContext(TimerContext);
+  const { rounds, setRounds } = useContext(TimerContext);
+  const { rest, setRest } = useContext(TimerContext);
+
+  const handleChange = (e) => {
+    if (e.target.name === "timer") setTime(e.target.value);
+    else if (e.target.name === "rounds") setRounds(e.target.value);
+    else setRest(e.target.value);
+  };
+
   return (
     <div className="w-75">
-      {props.type !== "Stopwatch" ? (
-        <SetTime
-          type={props.type}
-          className={props.styleName}
-          placeholder={props.placeholder}
-        ></SetTime>
+      {props.timerType !== "Stopwatch" ? (
+        <>
+          <Text>
+            <label htmlFor="timer">Set workout time</label>
+            <br />
+            {timerValue(time)}
+          </Text>
+          <SetInput
+            name="timer"
+            type="range"
+            placeholder={props.placeholder}
+            min="0"
+            max="7200"
+            step="15"
+            value={time}
+            onChange={handleChange}
+          ></SetInput>
+        </>
       ) : null}
-      {props.type === "XY" || props.type === "Tabata" ? (
-        <SetTime
-          type={props.type}
-          className={props.styleName}
-          placeholder={props.placeholderRounds}
-        ></SetTime>
+      {props.timerType === "XY" || props.timerType === "Tabata" ? (
+        <>
+          <Text>
+            <label htmlFor="rounds">Set number of rounds</label>
+            <br />
+            {rounds}
+          </Text>
+          <SetInput
+            name="rounds"
+            type="range"
+            placeholder={props.placeholderRounds}
+            min="0"
+            max="5"
+            step="1"
+            value={rounds}
+            onChange={handleChange}
+          ></SetInput>
+        </>
       ) : null}
-      {props.type === "Tabata" ? (
-        <SetTime
-          type={props.type}
-          className={props.styleName}
-          placeholder={props.placeholderRest}
-        ></SetTime>
+      {props.timerType === "Tabata" ? (
+        <>
+          <Text>
+            <label htmlFor="rest">Set rest time</label>
+            <br />
+            {timerValue(rest).substr(4, 6)}
+          </Text>
+          <SetInput
+            name="rest"
+            type="range"
+            placeholder={props.placeholderRest}
+            min="0"
+            max="300"
+            step="15"
+            value={rest}
+            onChange={handleChange}
+          ></SetInput>
+        </>
       ) : null}
       <Credentials>By Martin Gundtoft</Credentials>
     </div>

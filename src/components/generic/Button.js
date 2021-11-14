@@ -35,7 +35,7 @@ const Button = (props) => {
       : props.setBtnState(!props.btnState);
   };
   const changeSettingsState = () => {
-    props.sendSettingsState(!props.settingsState);
+    props.setSettingsState(!props.settingsState);
   };
   return (
     <Btn

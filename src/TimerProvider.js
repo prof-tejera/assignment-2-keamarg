@@ -20,10 +20,19 @@ const TimerProvider = ({ children }) => {
   const [xySettings, setXySettings] = useState(false);
   const [tabataTimer, setTabataTimer] = useState(true);
   const [tabataSettings, setTabataSettings] = useState(false);
+  const [time, setTime] = useState(0);
+  const [rounds, setRounds] = useState(0);
+  const [rest, setRest] = useState(0);
 
   return (
     <TimerContext.Provider
       value={{
+        time,
+        setTime,
+        rounds,
+        setRounds,
+        rest,
+        setRest,
         btnState,
         setBtnState,
         settingsState,

@@ -6,6 +6,7 @@ import Settings from "../generic/Settings";
 import Button from "../generic/Button";
 import DisplayTime from "../generic/DisplayTime";
 import { COLORS } from "../../utils/helpers";
+import { timerValue } from "../../utils/helpers.js";
 
 const Title = styled.h1`
   color: ${COLORS.text};
@@ -58,7 +59,21 @@ const LowerPanel = styled.div`
   height: 15rem;
 `;
 
+const SettingsPanel = styled.div`
+  position: relative;
+  height: 25rem;
+  .settingsBtn {
+    z-index: 1;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: transparent;
+  }
+`;
+
 const Timer = (props) => {
+  const { time, setTime } = useContext(TimerContext);
   const { stopwatchTimer, setStopwatchTimer } = useContext(TimerContext);
   const { stopwatchSettings, setStopwatchSettings } = useContext(TimerContext);
   const { countdownTimer, setCountdownTimer } = useContext(TimerContext);
@@ -119,7 +134,6 @@ const Timer = (props) => {
     }
   }
 
-  console.log(settings);
   if (!settings.current) {
     return (
       <Panel timerType={props.timerType}>
@@ -131,7 +145,7 @@ const Timer = (props) => {
             btnState={timer.current}
             settingsState={settings.current}
             setBtnState={setTimer.current}
-            sendSettingsState={setSettings.current}
+            setSettingsState={setSettings.current}
           ></Button>
           <i className={`bi bi-stopwatch stopwatch ${timer.current}`}></i>
         </UpperPanel>
@@ -140,7 +154,7 @@ const Timer = (props) => {
             <div className="row">
               <DisplayTime
                 styleName="col text-center"
-                time={`0${0}:0${0}:0${0}`}
+                time={timerValue(time)}
               />
             </div>
             <div className="row justify-content-around">
@@ -164,17 +178,17 @@ const Timer = (props) => {
   }
   return (
     <Panel timerType={props.timerType}>
-      <UpperPanel className="text-center d-flex align-items-center justify-content-center">
+      <SettingsPanel className="settingspanel text-center d-flex align-items-center justify-content-center">
         <Button
           type={settings.current ? "exitSettings" : "enterSettings"}
           styleName="settingsBtn"
           btnState={timer.current}
           settingsState={settings.current}
           setBtnState={setTimer.current}
-          sendSettingsState={setSettings.current}
+          setSettingsState={setSettings.current}
         ></Button>
-        <Settings styleName="p-2" type={props.timerType}></Settings>
-      </UpperPanel>
+        <Settings styleName="p-2" timerType={props.timerType}></Settings>
+      </SettingsPanel>
     </Panel>
   );
 };

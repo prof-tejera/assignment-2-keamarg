@@ -7,7 +7,7 @@ const Display = styled.label`
   // border-radius: 0.3rem;
   // padding: 1rem;
   margin-bottom: 2rem;
-  font-size: 4.5rem;
+  font-size: 3rem;
   font-weight: 300;
   // font-family: "Orbitron", sans-serif;
   color: white;
