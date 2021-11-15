@@ -1,15 +1,18 @@
 import { useContext, useRef, useEffect, useState } from "react";
 import { TimerContext } from "../TimerProvider";
 
-export const useTimerStarter = () => {
-  const [delay, setDelay] = useState(1000);
-  const { isRunning, setIsRunning } = useContext(TimerContext);
+export const useTimerStarter = (timerType) => {
+  const [delay] = useState(1000);
+  const { isRunning } = useContext(TimerContext);
   const { time, setTime } = useContext(TimerContext);
 
   useInterval(
     () => {
-      // Your custom logic here
-      setTime(time + 1);
+      if (timerType === "Stopwatch") {
+        setTime(Number(time) + 1);
+      } else {
+        setTime(Number(time) - 1);
+      }
     },
     isRunning ? delay : null
   );

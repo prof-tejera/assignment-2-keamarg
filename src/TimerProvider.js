@@ -24,10 +24,13 @@ const TimerProvider = ({ children }) => {
   const [rounds, setRounds] = useState(0);
   const [rest, setRest] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [savedTime, setSavedTime] = useState(0);
 
   return (
     <TimerContext.Provider
       value={{
+        savedTime,
+        setSavedTime,
         isRunning,
         setIsRunning,
         time,

@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { COLORS } from "../../utils/helpers";
-import { useContext } from "react";
-import { TimerContext } from "../../TimerProvider";
+import { COLORS, BUTTONS } from "../../utils/helpers";
 
 const Btn = styled.button`
   border-radius: 0.3rem;
@@ -17,67 +15,34 @@ const Btn = styled.button`
     opacity: 0.6;
   }
   background-color: ${(props) =>
-    props.type === "Start"
+    props.value === "start"
       ? COLORS.start
-      : props.type === "Stop"
+      : props.value === "stop"
       ? COLORS.stop
       : COLORS.reset};
 `;
 
 const Button = (props) => {
-  const { isRunning, setIsRunning } = useContext(TimerContext);
-  const { setBtnState, btnState } = useContext(TimerContext);
-
   Button.defaultProps = {
-    settingsState: false,
-    styleName: "settingsBtn",
-    type: "Stopwatch",
+    styleName: "",
+    value: "",
+    onClick: null,
   };
-
-  // const changeBtnState = () => {
-  //   props.type === "Reset"
-  //     ? props.setBtnState(true)
-  //     : props.setBtnState(!props.btnState);
-  //   setIsRunning(!isRunning);
-  // };
-  const changeBtnState = () => {
-    console.log(btnState);
-    // btnState === "Reset" ? setBtnState(true) : setBtnState(!btnState);
-    setBtnState(!btnState);
-    setIsRunning(!isRunning);
-  };
-
-  const changeSettingsState = () => {
-    props.setSettingsState(!props.settingsState);
-  };
+  const { value } = props;
   return (
     <Btn
       className={props.styleName}
-      type={props.type}
-      onClick={() => {
-        changeBtnState();
-        if (props.styleName === "settingsBtn") {
-          changeSettingsState();
-        }
-      }}
+      value={props.value}
+      onClick={props.onClick}
     >
-      {props.type === "Reset" ? (
-        <i className="bi bi-arrow-counterclockwise"></i>
-      ) : props.type === "Start" ? (
-        <i className="bi bi-play-circle"></i>
-      ) : props.type === "Stop" ? (
-        <i className="bi bi-pause-circle"></i>
-      ) : props.styleName === "settingsBtn" ? (
-        <i className="bi bi-list"></i>
-      ) : null}
+      <i className={BUTTONS[value]}></i>
     </Btn>
   );
 };
 Button.propTypes = {
-  btnState: PropTypes.bool,
-  settingsState: PropTypes.bool,
   styleName: PropTypes.string,
-  type: PropTypes.string,
+  value: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Button;

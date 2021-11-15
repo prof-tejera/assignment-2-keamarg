@@ -72,11 +72,13 @@ const Navbar = () => {
   const { setTime } = useContext(TimerContext);
   const { setIsRunning } = useContext(TimerContext);
   const { setBtnState } = useContext(TimerContext);
+  const { setSettingsState } = useContext(TimerContext);
 
   const handleClick = () => {
     setTime(0);
     setIsRunning(false);
-    setBtnState(false);
+    setBtnState(true);
+    setSettingsState(true);
   };
 
   return (

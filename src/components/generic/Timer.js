@@ -73,7 +73,7 @@ const SettingsPanel = styled.div`
 `;
 
 const Timer = (props) => {
-  // const { time, setTime } = useContext(TimerContext);
+  const { time, setTime } = useContext(TimerContext);
   const { stopwatchTimer, setStopwatchTimer } = useContext(TimerContext);
   const { stopwatchSettings, setStopwatchSettings } = useContext(TimerContext);
   const { countdownTimer, setCountdownTimer } = useContext(TimerContext);
@@ -82,6 +82,10 @@ const Timer = (props) => {
   const { tabataSettings, setTabataSettings } = useContext(TimerContext);
   const { xyTimer, setXyTimer } = useContext(TimerContext);
   const { xySettings, setXySettings } = useContext(TimerContext);
+  const { isRunning, setIsRunning } = useContext(TimerContext);
+  const { btnState, setBtnState } = useContext(TimerContext);
+  const { settingsState, setSettingsState } = useContext(TimerContext);
+  const { savedTime, setSavedTime } = useContext(TimerContext);
 
   // Alternative solution with less lines of code, but it seems "eval" is on the eslint most wanted list, so I decided to opt for the solution with conditionals (below). Maybe there's a better way to do what I am trying to do?
 
@@ -129,22 +133,44 @@ const Timer = (props) => {
       console.log("no timer selected");
     }
   }
-  useTimerStarter();
 
-  if (!settings.current) {
+  const handleClick = (e) => {
+    if (props.timerType === "Stopwatch") {
+      setSavedTime(0);
+    }
+    if (e.currentTarget.value === "reset") {
+      setTime(savedTime);
+      setIsRunning(false);
+    }
+
+    if (e.currentTarget.value === "start" || e.currentTarget.value === "stop") {
+      setIsRunning(!isRunning);
+      setBtnState(!btnState);
+    }
+    if (e.currentTarget.value === "settings") {
+      setSettingsState(!settingsState);
+      setSavedTime(time);
+    }
+  };
+  useTimerStarter(props.timerType);
+
+  if (!settingsState || props.timerType === "Stopwatch") {
     return (
       <Panel timerType={props.timerType}>
         <UpperPanel className="text-center">
           <Title>{props.timerType}</Title>
-          <Button
-            type={settings.current ? "exitSettings" : "enterSettings"}
-            styleName="settingsBtn"
-            btnState={timer.current}
-            settingsState={settings.current}
-            setBtnState={setTimer.current}
-            setSettingsState={setSettings.current}
-          ></Button>
-          <i className={`bi bi-stopwatch stopwatch ${timer.current}`}></i>
+          {props.timerType !== "Stopwatch" ? (
+            <Button
+              styleName="settingsBtn"
+              btnState={timer.current}
+              settingsState={settings.current}
+              setBtnState={setTimer.current}
+              setSettingsState={setSettings.current}
+              onClick={handleClick}
+              value="settings"
+            ></Button>
+          ) : null}
+          <i className={`bi bi-stopwatch stopwatch ${!isRunning}`}></i>
         </UpperPanel>
         <LowerPanel className="d-flex align-items-center">
           <div className="container">
@@ -158,14 +184,16 @@ const Timer = (props) => {
               <Button
                 styleName="col-5"
                 btnState={timer.current}
-                type={timer.current ? "Start" : "Stop"}
+                value={btnState ? "start" : "stop"}
                 setBtnState={setTimer.current}
+                onClick={handleClick}
               ></Button>
               <Button
                 styleName="col-5"
                 btnState={timer.current}
-                type="Reset"
+                value="reset"
                 setBtnState={setTimer.current}
+                onClick={handleClick}
               ></Button>
             </div>
           </div>
@@ -177,12 +205,14 @@ const Timer = (props) => {
     <Panel timerType={props.timerType}>
       <SettingsPanel className="settingspanel text-center d-flex align-items-center justify-content-center">
         <Button
-          type={settings.current ? "exitSettings" : "enterSettings"}
+          type="settingsBtn"
           styleName="settingsBtn"
           btnState={timer.current}
           settingsState={settings.current}
           setBtnState={setTimer.current}
           setSettingsState={setSettings.current}
+          onClick={handleClick}
+          value="settings"
         ></Button>
         <Settings styleName="p-2" timerType={props.timerType}></Settings>
       </SettingsPanel>

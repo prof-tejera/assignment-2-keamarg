@@ -14,6 +14,13 @@ export const COLORS = {
   nav: "#231F20",
 };
 
+export const BUTTONS = {
+  reset: "bi bi-arrow-counterclockwise",
+  start: "bi bi-play-circle",
+  stop: "bi bi-pause-circle",
+  settings: "bi bi-list",
+};
+
 export const timerValue = (value) => {
   const fullTime = new Date(value * 1000).toISOString();
   const hours = fullTime.substr(12, 1);
