@@ -6,7 +6,7 @@ import Settings from "../generic/Settings";
 import Button from "../generic/Button";
 import DisplayTime from "../generic/DisplayTime";
 import { COLORS } from "../../utils/helpers";
-import { timerValue } from "../../utils/helpers.js";
+import { useTimerStarter } from "../../utils/hooks";
 
 const Title = styled.h1`
   color: ${COLORS.text};
@@ -73,7 +73,7 @@ const SettingsPanel = styled.div`
 `;
 
 const Timer = (props) => {
-  const { time } = useContext(TimerContext);
+  // const { time, setTime } = useContext(TimerContext);
   const { stopwatchTimer, setStopwatchTimer } = useContext(TimerContext);
   const { stopwatchSettings, setStopwatchSettings } = useContext(TimerContext);
   const { countdownTimer, setCountdownTimer } = useContext(TimerContext);
@@ -98,7 +98,6 @@ const Timer = (props) => {
 
   switch (props.timerType) {
     case "Stopwatch": {
-      console.log("pingStopwatch");
       timer.current = stopwatchTimer;
       setTimer.current = setStopwatchTimer;
       settings.current = stopwatchSettings;
@@ -106,7 +105,6 @@ const Timer = (props) => {
       break;
     }
     case "Countdown": {
-      console.log("pingCountdown");
       timer.current = countdownTimer;
       setTimer.current = setCountdownTimer;
       settings.current = countdownSettings;
@@ -114,7 +112,6 @@ const Timer = (props) => {
       break;
     }
     case "XY": {
-      console.log("pingXY");
       timer.current = xyTimer;
       setTimer.current = setXyTimer;
       settings.current = xySettings;
@@ -122,7 +119,6 @@ const Timer = (props) => {
       break;
     }
     case "Tabata": {
-      console.log("pingTabata");
       timer.current = tabataTimer;
       setTimer.current = setTabataTimer;
       settings.current = tabataSettings;
@@ -133,6 +129,7 @@ const Timer = (props) => {
       console.log("no timer selected");
     }
   }
+  useTimerStarter();
 
   if (!settings.current) {
     return (
@@ -154,7 +151,7 @@ const Timer = (props) => {
             <div className="row">
               <DisplayTime
                 styleName="col text-center"
-                time={timerValue(time)}
+                // time={timerValue(time)}
               />
             </div>
             <div className="row justify-content-around">

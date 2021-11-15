@@ -70,9 +70,13 @@ const links = [
 
 const Navbar = () => {
   const { setTime } = useContext(TimerContext);
+  const { setIsRunning } = useContext(TimerContext);
+  const { setBtnState } = useContext(TimerContext);
 
   const handleClick = () => {
     setTime(0);
+    setIsRunning(false);
+    setBtnState(false);
   };
 
   return (

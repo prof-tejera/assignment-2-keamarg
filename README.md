@@ -59,3 +59,9 @@ For people looking for an additional challenge, we have provided some bonus feat
 ## Installing and Running the project
 
 As you have noticed this repository is empty. To begin this assignment you must copy over all of our files from A1 into this repo. I recommend not copying over `node_modules` and instead re-install here. You can then commit and deploy as usual from this repo.
+
+## Assignment Notes
+
+- https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+
+https://prof-tejera.github.io/assignment-2-keamarg

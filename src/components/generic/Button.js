@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { COLORS } from "../../utils/helpers";
+import { useContext } from "react";
+import { TimerContext } from "../../TimerProvider";
 
 const Btn = styled.button`
   border-radius: 0.3rem;
@@ -23,17 +25,28 @@ const Btn = styled.button`
 `;
 
 const Button = (props) => {
+  const { isRunning, setIsRunning } = useContext(TimerContext);
+  const { setBtnState, btnState } = useContext(TimerContext);
+
   Button.defaultProps = {
-    btnState: true,
     settingsState: false,
     styleName: "settingsBtn",
     type: "Stopwatch",
   };
+
+  // const changeBtnState = () => {
+  //   props.type === "Reset"
+  //     ? props.setBtnState(true)
+  //     : props.setBtnState(!props.btnState);
+  //   setIsRunning(!isRunning);
+  // };
   const changeBtnState = () => {
-    props.type === "Reset"
-      ? props.setBtnState(true)
-      : props.setBtnState(!props.btnState);
+    console.log(btnState);
+    // btnState === "Reset" ? setBtnState(true) : setBtnState(!btnState);
+    setBtnState(!btnState);
+    setIsRunning(!isRunning);
   };
+
   const changeSettingsState = () => {
     props.setSettingsState(!props.settingsState);
   };

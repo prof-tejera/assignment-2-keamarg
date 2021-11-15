@@ -15,9 +15,9 @@ export const COLORS = {
 };
 
 export const timerValue = (value) => {
-  const time = new Date(value * 1000).toISOString();
-  const hours = time.substr(12, 1);
-  const minutes = time.substr(14, 2);
-  const seconds = time.substr(17, 2);
+  const fullTime = new Date(value * 1000).toISOString();
+  const hours = fullTime.substr(12, 1);
+  const minutes = fullTime.substr(14, 2);
+  const seconds = fullTime.substr(17, 2);
   return hours + "h " + minutes + "m " + seconds + "s";
 };
