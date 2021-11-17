@@ -73,7 +73,7 @@ const Settings = (props) => {
             type="range"
             min="0"
             max="7200"
-            step="2"
+            step="15"
             value={time}
             onChange={handleChange}
           ></SetInput>
@@ -109,7 +109,7 @@ const Settings = (props) => {
             type="range"
             min="0"
             max="300"
-            step="2"
+            step="5"
             value={rest}
             onChange={handleChange}
           ></SetInput>
