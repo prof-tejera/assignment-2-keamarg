@@ -1,29 +1,32 @@
 import { useContext, useRef, useEffect, useState } from "react";
 import { TimerContext } from "../TimerProvider";
+import { TIMERS, MESSAGES } from "./helpers";
 
 export const useTimerStarter = (timerType) => {
   const [delay] = useState(1000);
-  const { isRunning } = useContext(TimerContext);
+  const { isRunning, setIsRunning } = useContext(TimerContext);
   const { time, setTime } = useContext(TimerContext);
+  const { setBtnState } = useContext(TimerContext);
+  const { setShowMessage } = useContext(TimerContext);
+  const { setMessage } = useContext(TimerContext);
 
   useInterval(
     () => {
-      if (timerType === "Stopwatch") {
+      if (timerType === TIMERS.stopwatch) {
         setTime(Number(time) + 1);
       } else {
-        setTime(Number(time) - 1);
+        if (time > 0) {
+          setTime(Number(time) - 1);
+        } else {
+          setIsRunning(false);
+          setBtnState(true);
+          setMessage(MESSAGES.finished);
+          setShowMessage(true);
+        }
       }
     },
     isRunning ? delay : null
   );
-
-  //   function handleDelayChange(e) {
-  //     setDelay(Number(e.target.value));
-  //   }
-
-  //   function handleIsRunningChange(e) {
-  //     setIsRunning(e.target.checked);
-  //   }
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();

@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { COLORS, BUTTONS } from "../../utils/helpers";
+import { COLORS, BUTTONS, BTNTYPE } from "../../utils/helpers";
 
 const Btn = styled.button`
   border-radius: 0.3rem;
-  // padding: 0.5rem;
   border: none;
   font-size: 1.5rem;
   font-weight: bold;
@@ -14,28 +13,26 @@ const Btn = styled.button`
   :hover {
     opacity: 0.6;
   }
+
   background-color: ${(props) =>
-    props.value === "start"
+    props.value === BTNTYPE.start
       ? COLORS.start
-      : props.value === "stop"
+      : props.value === BTNTYPE.stop
       ? COLORS.stop
       : COLORS.reset};
 `;
 
 const Button = (props) => {
   Button.defaultProps = {
-    styleName: "",
-    value: "",
+    styleName: "none",
+    value: "none",
     onClick: null,
   };
-  const { value } = props;
+  const { value, styleName, onClick, inner } = props;
   return (
-    <Btn
-      className={props.styleName}
-      value={props.value}
-      onClick={props.onClick}
-    >
-      <i className={BUTTONS[value]}></i>
+    <Btn className={styleName} value={value} onClick={onClick}>
+      {inner}
+      <i className={BUTTONS[value] ? BUTTONS[value] : BUTTONS.start}></i>
     </Btn>
   );
 };

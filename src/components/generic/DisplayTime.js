@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { TimerContext } from "../../TimerProvider";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { timerValue } from "../../utils/helpers.js";
 
 const Display = styled.label`
@@ -12,15 +11,10 @@ const Display = styled.label`
   color: white;
 `;
 
-const DisplayTime = (props) => {
-  Display.defaultProps = {
-    styleName: "myClass",
-  };
+const DisplayTime = () => {
   const { time } = useContext(TimerContext);
-  return <Display className={props.styleName}>{timerValue(time)}</Display>;
-};
-Display.propTypes = {
-  styleName: PropTypes.string,
+
+  return <Display>{timerValue(time)}</Display>;
 };
 
 export default DisplayTime;

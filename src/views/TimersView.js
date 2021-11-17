@@ -5,7 +5,6 @@ import Stopwatch from "../components/timers/Stopwatch";
 import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";
 import Tabata from "../components/timers/Tabata";
-import TimerProvider from "../TimerProvider";
 import Navbar from "../components/generic/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -46,14 +45,12 @@ const App = () => {
   return (
     <Timers>
       <Router>
-        <TimerProvider>
-          <Navbar />
-          <Switch>
-            {routes.map(({ path, component }, key) => (
-              <Route exact path={path} component={component} key={key} />
-            ))}
-          </Switch>
-        </TimerProvider>
+        <Navbar />
+        <Switch>
+          {routes.map(({ path, component }, key) => (
+            <Route exact path={path} component={component} key={key} />
+          ))}
+        </Switch>
       </Router>
     </Timers>
   );

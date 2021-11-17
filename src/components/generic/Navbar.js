@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { TimerContext } from "../../TimerProvider";
 import { NavLink } from "react-router-dom";
-import { COLORS } from "../../utils/helpers";
+import { COLORS, TIMERS } from "../../utils/helpers";
 import styled from "styled-components";
 
 const NavList = styled.ul`
@@ -62,23 +62,40 @@ const NavList = styled.ul`
 `;
 
 const links = [
-  { name: "Stopwatch", path: "/" },
-  { name: "Countdown", path: "/Countdown" },
-  { name: "XY", path: "/XY" },
-  { name: "Tabata", path: "/Tabata" },
+  { name: TIMERS.stopwatch, path: "/" },
+  { name: TIMERS.countdown, path: "/countdown" },
+  { name: TIMERS.xy, path: "/xy" },
+  { name: TIMERS.tabata, path: "/tabata" },
 ];
 
 const Navbar = () => {
   const { setTime } = useContext(TimerContext);
+  const { setRounds } = useContext(TimerContext);
+  const { setRest } = useContext(TimerContext);
   const { setIsRunning } = useContext(TimerContext);
   const { setBtnState } = useContext(TimerContext);
   const { setSettingsState } = useContext(TimerContext);
+  const { docs } = useContext(TimerContext);
+  const { setCurrentRound } = useContext(TimerContext);
+  const { setShowSettingsMessage } = useContext(TimerContext);
+  const { setShowTimerRounds } = useContext(TimerContext);
+  const { setShowMessage } = useContext(TimerContext);
 
-  const handleClick = () => {
-    setTime(0);
-    setIsRunning(false);
-    setBtnState(true);
-    setSettingsState(true);
+  const handleClick = (e) => {
+    if (!docs) {
+      setTime(0);
+      setRounds(0);
+      setRest(0);
+      setIsRunning(false);
+      setBtnState(true);
+      setSettingsState(true);
+      setCurrentRound(0);
+      setShowSettingsMessage(false);
+      setShowMessage(false);
+      if (e.target.innerHTML === "Stopwatch") {
+        setShowTimerRounds(true);
+      }
+    }
   };
 
   return (

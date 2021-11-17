@@ -7,7 +7,9 @@ import Loading from "../components/generic/Loading";
 import Button from "../components/generic/Button";
 import DisplayTime from "../components/generic/DisplayTime";
 import Panel from "../components/generic/Panel";
+import Timer from "../components/generic/Timer";
 import Settings from "../components/generic/Settings";
+import Navbar from "../components/generic/Navbar";
 
 const Container = styled.div`
   display: flex;
@@ -41,48 +43,29 @@ const Documentation = () => {
           component={<Button />}
           propDocs={[
             {
-              prop: "btnState",
-              description: "Starts and stops the timer",
-              type: "boolean",
-              defaultValue: "true",
-            },
-            {
-              prop: "settingsState",
-              description: "Switches between main app and settings",
-              type: "boolean",
-              defaultValue: "false",
-            },
-            {
               prop: "styleName",
               description: "Has the classNames",
               type: "String",
-              defaultValue: "settingsBtn",
+              defaultValue: "none",
             },
             {
-              prop: "type",
-              description: "Has the type of style for the given timer",
+              prop: "value",
+              description: "Has the button type",
               type: "String",
-              defaultValue: "Stopwatch",
+              defaultValue: "none",
+            },
+            {
+              prop: "onClick",
+              description: "Holds the clickHandler function",
+              type: "function",
+              defaultValue: "null",
             },
           ]}
         />
         <DocumentComponent
           title="DisplayTime"
           component={<DisplayTime />}
-          propDocs={[
-            {
-              prop: "styleName",
-              description: "Has the classNames",
-              type: "String",
-              defaultValue: "myClass",
-            },
-            {
-              prop: "time",
-              description: "Has the timer value",
-              type: "String",
-              defaultValue: "0",
-            },
-          ]}
+          propDocs={[{}]}
         />
         <DocumentComponent
           title="Panel"
@@ -101,34 +84,34 @@ const Documentation = () => {
           component={<Settings />}
           propDocs={[
             {
-              prop: "type",
+              prop: "timerType",
               description: "Has the type of timer",
               type: "String",
               defaultValue: "Countdown",
             },
+          ]}
+        />
+        <DocumentComponent
+          title="Timer"
+          component={<Timer />}
+          propDocs={[
             {
               prop: "timerType",
-              description: "Has the type of timer settings",
+              description: "Has the type of timer",
               type: "String",
               defaultValue: "Countdown",
             },
+          ]}
+        />
+        <DocumentComponent
+          title="Navbar"
+          component={<Navbar />}
+          propDocs={[
             {
-              prop: "placeholder",
-              description: "Has the value of the input field for countdown",
+              prop: "timerType",
+              description: "Has the type of timer",
               type: "String",
-              defaultValue: "input",
-            },
-            {
-              prop: "placeholderRounds",
-              description: "Has the value of the input field for rounds",
-              type: "String",
-              defaultValue: "input",
-            },
-            {
-              prop: "placeholderRest",
-              description: "Has the value of the input field for rest",
-              type: "String",
-              defaultValue: "input",
+              defaultValue: "Countdown",
             },
           ]}
         />

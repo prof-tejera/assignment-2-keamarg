@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { timerValue } from "../../utils/helpers.js";
+import { INPUTS, TIMERS, timerValue } from "../../utils/helpers.js";
 import PropTypes from "prop-types";
 import { COLORS } from "../../utils/helpers.js";
 import React, { useContext } from "react";
@@ -8,11 +8,11 @@ import { TimerContext } from "../../TimerProvider";
 const SetInput = styled.input`
   // border: 1px solid black;
   color: ${(props) =>
-    props.type === "Stopwatch"
+    props.type === TIMERS.stopwatch
       ? COLORS.stopwatch
-      : props.type === "Countdown"
+      : props.type === TIMERS.countdown
       ? COLORS.countdown
-      : props.type === "XY"
+      : props.type === TIMERS.xy
       ? COLORS.xy
       : COLORS.tabata};
   font-size: 0.8rem;
@@ -35,27 +35,32 @@ const Text = styled.p`
 `;
 
 const Settings = (props) => {
+  const { timerType } = props;
+
   Settings.defaultProps = {
-    // type: "Countdown",
-    timerType: "Countdown",
-    placeholder: "hh:mm:ss",
-    placeholderRounds: "hh:mm:ss",
-    placeholderRest: "hh:mm:ss",
+    timerType: TIMERS.countdown,
   };
 
   const { time, setTime } = useContext(TimerContext);
   const { rounds, setRounds } = useContext(TimerContext);
   const { rest, setRest } = useContext(TimerContext);
+  const { docs } = useContext(TimerContext);
 
   const handleChange = (e) => {
-    if (e.target.name === "timer") setTime(e.target.value);
-    else if (e.target.name === "rounds") setRounds(e.target.value);
-    else setRest(e.target.value);
+    if (!docs) {
+      if (e.target.name === INPUTS.timer) {
+        setTime(e.target.value);
+      } else if (e.target.name === INPUTS.rounds) {
+        setRounds(e.target.value);
+      } else {
+        setRest(e.target.value);
+      }
+    }
   };
 
   return (
     <div className="w-75">
-      {props.timerType !== "Stopwatch" ? (
+      {timerType !== TIMERS.stopwatch ? (
         <>
           <Text>
             <label htmlFor="timer">Set workout time</label>
@@ -65,16 +70,15 @@ const Settings = (props) => {
           <SetInput
             name="timer"
             type="range"
-            placeholder={props.placeholder}
             min="0"
             max="7200"
-            step="15"
+            step="5"
             value={time}
             onChange={handleChange}
           ></SetInput>
         </>
       ) : null}
-      {props.timerType === "XY" || props.timerType === "Tabata" ? (
+      {timerType === TIMERS.xy || timerType === TIMERS.tabata ? (
         <>
           <Text>
             <label htmlFor="rounds">Set number of rounds</label>
@@ -84,8 +88,7 @@ const Settings = (props) => {
           <SetInput
             name="rounds"
             type="range"
-            placeholder={props.placeholderRounds}
-            min="0"
+            min="1"
             max="5"
             step="1"
             value={rounds}
@@ -93,7 +96,7 @@ const Settings = (props) => {
           ></SetInput>
         </>
       ) : null}
-      {props.timerType === "Tabata" ? (
+      {props.timerType === TIMERS.tabata ? (
         <>
           <Text>
             <label htmlFor="rest">Set rest time</label>
@@ -103,7 +106,6 @@ const Settings = (props) => {
           <SetInput
             name="rest"
             type="range"
-            placeholder={props.placeholderRest}
             min="0"
             max="300"
             step="15"
@@ -118,11 +120,7 @@ const Settings = (props) => {
 };
 
 Settings.propTypes = {
-  type: PropTypes.string,
   timerType: PropTypes.string,
-  placeholder: PropTypes.string,
-  placeholderRounds: PropTypes.string,
-  placeholderRest: PropTypes.string,
 };
 
 export default Settings;

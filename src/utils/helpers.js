@@ -19,8 +19,34 @@ export const BUTTONS = {
   start: "bi bi-play-circle",
   stop: "bi bi-pause-circle",
   settings: "bi bi-list",
+  forward: "bi bi-skip-forward-circle",
 };
 
+export const BTNTYPE = {
+  reset: "reset",
+  start: "start",
+  stop: "stop",
+  settings: "settings",
+  forward: "forward",
+};
+
+export const TIMERS = {
+  stopwatch: "Stopwatch",
+  countdown: "Countdown",
+  xy: "XY",
+  tabata: "Tabata",
+};
+
+export const INPUTS = {
+  timer: "timer",
+  rounds: "rounds",
+  rest: "rest",
+};
+
+export const MESSAGES = {
+  finished: "Well done!",
+  settimer: "Check your settings",
+};
 export const timerValue = (value) => {
   const fullTime = new Date(value * 1000).toISOString();
   const hours = fullTime.substr(12, 1);

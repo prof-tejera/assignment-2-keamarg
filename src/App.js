@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import styled from "styled-components";
-// import AppProvider from "./AppProvider";
+import { TimerContext } from "./TimerProvider";
 
 import DocumentationView from "./views/DocumentationView";
 import TimersView from "./views/TimersView";
@@ -13,15 +13,24 @@ const Container = styled.div`
 `;
 
 const App = () => {
+  const handleClick = (e) => {
+    if (e.target.innerHTML === "Documentation") {
+      setDocs(true);
+    } else {
+      setDocs(false);
+    }
+  };
+  const { setDocs } = useContext(TimerContext);
+
   return (
     <Container>
       <Router>
         <nav>
           <ul>
-            <li>
+            <li id="timers" onClick={handleClick}>
               <Link to="/">Timers</Link>
             </li>
-            <li>
+            <li value="docs" onClick={handleClick}>
               <Link to="/docs">Documentation</Link>
             </li>
           </ul>

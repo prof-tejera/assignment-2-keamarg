@@ -1,22 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { COLORS } from "../../utils/helpers.js";
+import { COLORS, TIMERS } from "../../utils/helpers.js";
 
 const Container = styled.div`
   // border: 1px solid black;
   width: 20rem;
   background-color: ${(props) =>
-    props.type === "Stopwatch"
+    props.type === TIMERS.stopwatch
       ? COLORS.stopwatch
-      : props.type === "Countdown"
+      : props.type === TIMERS.countdown
       ? COLORS.countdown
-      : props.type === "XY"
+      : props.type === TIMERS.xy
       ? COLORS.xy
       : COLORS.tabata};
-  // color: var(--blue);
-  // padding: 2rem 0 2rem 0;
-  // line-height: 30px;
   font-size: 2rem;
   border-radius: 0rem 0rem 0.3rem 0.3rem;
 `;

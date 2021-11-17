@@ -11,7 +11,7 @@ export const TimerContext = createContext({
 
 const TimerProvider = ({ children }) => {
   const [btnState, setBtnState] = useState(true);
-  const [settingsState, setSettingsState] = useState(false);
+  const [settingsState, setSettingsState] = useState(true);
   const [stopwatchTimer, setStopwatchTimer] = useState(true);
   const [stopwatchSettings, setStopwatchSettings] = useState(false);
   const [countdownTimer, setCountdownTimer] = useState(true);
@@ -25,10 +25,28 @@ const TimerProvider = ({ children }) => {
   const [rest, setRest] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [savedTime, setSavedTime] = useState(0);
+  const [docs, setDocs] = useState(false);
+  const [message, setMessage] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
+  const [currentRound, setCurrentRound] = useState(rounds);
+  const [showSettingsMessage, setShowSettingsMessage] = useState(false);
+  const [showTimerRounds, setShowTimerRounds] = useState(true);
 
   return (
     <TimerContext.Provider
       value={{
+        showTimerRounds,
+        setShowTimerRounds,
+        showSettingsMessage,
+        setShowSettingsMessage,
+        currentRound,
+        setCurrentRound,
+        message,
+        setMessage,
+        showMessage,
+        setShowMessage,
+        docs,
+        setDocs,
         savedTime,
         setSavedTime,
         isRunning,
