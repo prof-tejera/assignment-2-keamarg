@@ -6,7 +6,7 @@ import Settings from "../generic/Settings";
 import Button from "../generic/Button";
 import DisplayTime from "../generic/DisplayTime";
 import { BTNTYPE, COLORS, TIMERS, MESSAGES } from "../../utils/helpers";
-import { useTimerStarter } from "../../utils/hooks";
+import { useTimer } from "../../utils/hooks";
 
 const Title = styled.h1`
   color: ${COLORS.text};
@@ -111,12 +111,14 @@ const Timer = (props) => {
 
   const handleClick = (e) => {
     if (!docs) {
+      const t = Number(time);
+
       // Start/stop button
       if (
         e.currentTarget.value === BTNTYPE.start ||
         e.currentTarget.value === BTNTYPE.stop
       ) {
-        if (!showMessage) {
+        if ((!showMessage && t) || timerType === TIMERS.stopwatch) {
           setIsRunning(!isRunning);
           setBtnState(!btnState);
         }
@@ -132,8 +134,12 @@ const Timer = (props) => {
 
       //Forward button
       if (e.currentTarget.value === BTNTYPE.forward) {
-        setTime(0);
-        setRounds(0);
+        if (t) {
+          setTime(0);
+          setRounds(0);
+          setMessage(MESSAGES.finished);
+          setShowMessage(true);
+        }
       }
 
       //Settings button
@@ -146,7 +152,6 @@ const Timer = (props) => {
         setShowMessage(false);
 
         if (timerType === TIMERS.countdown) {
-          const t = Number(time);
           if (!t) {
             setMessage(MESSAGES.settimer);
             setShowSettingsMessage(true);
@@ -156,12 +161,10 @@ const Timer = (props) => {
           }
         }
         if (timerType === TIMERS.xy || timerType === TIMERS.tabata) {
-          const t = Number(time);
           if (!t || rounds < 1) {
             setMessage(MESSAGES.settimer);
             setShowSettingsMessage(true);
           } else {
-            // setMessage(MESSAGES.finished);
             setShowSettingsMessage(false);
             setShowTimerRounds(true);
           }
@@ -189,7 +192,7 @@ const Timer = (props) => {
       }
     }
   };
-  useTimerStarter(timerType);
+  useTimer(timerType);
 
   if (!settingsState || timerType === TIMERS.stopwatch) {
     return (

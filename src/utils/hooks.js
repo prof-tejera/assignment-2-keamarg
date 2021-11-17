@@ -2,7 +2,7 @@ import { useContext, useRef, useEffect, useState } from "react";
 import { TimerContext } from "../TimerProvider";
 import { TIMERS, MESSAGES } from "./helpers";
 
-export const useTimerStarter = (timerType) => {
+export const useTimer = (timerType) => {
   const [delay] = useState(1000);
   const { isRunning, setIsRunning } = useContext(TimerContext);
   const { time, setTime } = useContext(TimerContext);
