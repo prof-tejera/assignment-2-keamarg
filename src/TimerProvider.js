@@ -9,6 +9,8 @@ export const TimerContext = createContext({
   },
 });
 
+// I had different experiments going, but ended up wrapping one big provider around the whole app.
+
 const TimerProvider = ({ children }) => {
   const [btnState, setBtnState] = useState(true);
   const [settingsState, setSettingsState] = useState(true);
@@ -31,10 +33,13 @@ const TimerProvider = ({ children }) => {
   const [currentRound, setCurrentRound] = useState(rounds);
   const [showSettingsMessage, setShowSettingsMessage] = useState(false);
   const [showTimerRounds, setShowTimerRounds] = useState(true);
+  const [currentRest, setCurrentRest] = useState(false);
 
   return (
     <TimerContext.Provider
       value={{
+        currentRest,
+        setCurrentRest,
         showTimerRounds,
         setShowTimerRounds,
         showSettingsMessage,

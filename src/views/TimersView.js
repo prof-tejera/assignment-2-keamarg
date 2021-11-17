@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 import Stopwatch from "../components/timers/Stopwatch";
 import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";
@@ -14,6 +13,7 @@ const Timers = styled.div`
   align-items: center;
 `;
 
+// Using the react router to create navigation
 const App = () => {
   const routes = [
     {

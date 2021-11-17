@@ -99,7 +99,7 @@ const Timer = (props) => {
   const { settingsState, setSettingsState } = useContext(TimerContext);
   const { savedTime, setSavedTime } = useContext(TimerContext);
   const { docs } = useContext(TimerContext);
-  const { rounds, setRounds } = useContext(TimerContext);
+  const { rounds } = useContext(TimerContext);
   const { currentRound, setCurrentRound } = useContext(TimerContext);
   const { message, setMessage } = useContext(TimerContext);
   const { showMessage, setShowMessage } = useContext(TimerContext);
@@ -109,6 +109,7 @@ const Timer = (props) => {
 
   const { timerType } = props;
 
+  // Click handler for all buttons
   const handleClick = (e) => {
     if (!docs) {
       const t = Number(time);
@@ -118,7 +119,7 @@ const Timer = (props) => {
         e.currentTarget.value === BTNTYPE.start ||
         e.currentTarget.value === BTNTYPE.stop
       ) {
-        if ((!showMessage && t) || timerType === TIMERS.stopwatch) {
+        if (t || timerType === TIMERS.stopwatch) {
           setIsRunning(!isRunning);
           setBtnState(!btnState);
         }
@@ -130,13 +131,14 @@ const Timer = (props) => {
         setBtnState(true);
         setIsRunning(false);
         setShowMessage(false);
+        setCurrentRound(rounds);
       }
 
       //Forward button
       if (e.currentTarget.value === BTNTYPE.forward) {
         if (t) {
           setTime(0);
-          setRounds(0);
+          setCurrentRound(0);
           setMessage(MESSAGES.finished);
           setShowMessage(true);
         }
@@ -150,6 +152,7 @@ const Timer = (props) => {
         setIsRunning(false);
         setShowTimerRounds(false);
         setShowMessage(false);
+        setCurrentRound(rounds);
 
         if (timerType === TIMERS.countdown) {
           if (!t) {
@@ -170,30 +173,13 @@ const Timer = (props) => {
           }
         }
       }
-
-      //Stopwatch
-      if (timerType === TIMERS.stopwatch) {
-        setSavedTime(0);
-        setShowTimerRounds(true);
-      }
-
-      //Countdown
-      if (timerType === TIMERS.countdown) {
-      }
-
-      //XY
-      if (timerType === TIMERS.xy) {
-        setCurrentRound(rounds);
-      }
-
-      //Tabata
-      if (timerType === TIMERS.tabata) {
-        setCurrentRound(rounds);
-      }
     }
   };
+
+  //start the timer hook
   useTimer(timerType);
 
+  // Base strucure for all timers
   if (!settingsState || timerType === TIMERS.stopwatch) {
     return (
       <Panel timerType={timerType}>
@@ -232,11 +218,9 @@ const Timer = (props) => {
           <div className="container">
             <div className="row col text-center">
               {showTimerRounds &&
+              currentRound > 1 &&
               (timerType === TIMERS.xy || timerType === TIMERS.tabata) ? (
-                <Message>
-                  {" "}
-                  {currentRound} of {rounds} rounds left
-                </Message>
+                <Message> {currentRound} rounds left</Message>
               ) : (
                 <Message> &nbsp;</Message>
               )}
@@ -272,7 +256,6 @@ const Timer = (props) => {
     <Panel timerType={timerType}>
       <SettingsPanel className="settingspanel text-center d-flex align-items-center justify-content-center">
         <Button
-          // type="settingsBtn"
           styleName="settingsBtn"
           onClick={handleClick}
           value={BTNTYPE.settings}

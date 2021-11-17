@@ -62,6 +62,10 @@ As you have noticed this repository is empty. To begin this assignment you must 
 
 ## Assignment Notes
 
-- https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+- All of the required features and timers have been implemented to the best of my skills and time. I have not implemented any of the bonus features (yet). The stopwatch timer is a bit different from the rest, and is intentionally made without an "end state", as that seemed more stopwatch-like.
+- I mainly used inspiration from class, and from the supplied article: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+- I used Bootstrap for the layout and for timer icons.
+- I used https://color.adobe.com/create/color-wheel to create a colorscheme, initially with the "split complimentary option", and then fine tuning until I was satisfied with the colors. I wanted a simple, minimalistic, but colorful app design, and took inspiration from different existing apps, as https://play.google.com/store/apps/details?id=cc.dreamspark.intervaltimer&hl=en.
+- I Have spent a lot of time DRY'ing the code, but I would like to refactor more, and maybe split some of the code into more components.
 
 https://prof-tejera.github.io/assignment-2-keamarg

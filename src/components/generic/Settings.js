@@ -46,6 +46,7 @@ const Settings = (props) => {
   const { rest, setRest } = useContext(TimerContext);
   const { docs } = useContext(TimerContext);
 
+  //Changehandler for all settings
   const handleChange = (e) => {
     if (!docs) {
       if (e.target.name === INPUTS.timer) {
@@ -72,7 +73,7 @@ const Settings = (props) => {
             type="range"
             min="0"
             max="7200"
-            step="5"
+            step="2"
             value={time}
             onChange={handleChange}
           ></SetInput>
@@ -108,7 +109,7 @@ const Settings = (props) => {
             type="range"
             min="0"
             max="300"
-            step="15"
+            step="2"
             value={rest}
             onChange={handleChange}
           ></SetInput>

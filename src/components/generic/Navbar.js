@@ -68,6 +68,7 @@ const links = [
   { name: TIMERS.tabata, path: "/tabata" },
 ];
 
+// The navbar is used to set the initial states for the different timers
 const Navbar = () => {
   const { setTime } = useContext(TimerContext);
   const { setRounds } = useContext(TimerContext);
@@ -80,7 +81,9 @@ const Navbar = () => {
   const { setShowSettingsMessage } = useContext(TimerContext);
   const { setShowTimerRounds } = useContext(TimerContext);
   const { setShowMessage } = useContext(TimerContext);
+  const { setSavedTime } = useContext(TimerContext);
 
+  // Click handler for the navbar
   const handleClick = (e) => {
     if (!docs) {
       setTime(0);
@@ -92,6 +95,8 @@ const Navbar = () => {
       setCurrentRound(0);
       setShowSettingsMessage(false);
       setShowMessage(false);
+      setSavedTime(0);
+
       if (e.target.innerHTML === "Stopwatch") {
         setShowTimerRounds(true);
       }

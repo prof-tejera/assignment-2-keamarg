@@ -12,6 +12,7 @@ const Container = styled.div`
   overflow: auto;
 `;
 
+// Clichandler for setting a variable, that helps avoid problems when clicking on components in the docs view
 const App = () => {
   const handleClick = (e) => {
     if (e.target.innerHTML === "Documentation") {
