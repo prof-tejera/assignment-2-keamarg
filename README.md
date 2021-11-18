@@ -63,9 +63,15 @@ As you have noticed this repository is empty. To begin this assignment you must 
 ## Assignment Notes
 
 - All of the required features and timers have been implemented to the best of my skills and time. I have not implemented any of the bonus features (yet). The stopwatch timer is a bit different from the rest, and is intentionally made without an "end state", as that seemed more stopwatch-like.
+- There are a few "lesser" bugs left, like for instance the "well done" statement switching to "it's on" if the stop button is pressed just at the right moment before a cycle ends. There are no errors in the console.
 - I mainly used inspiration from class, and from the supplied article: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
-- I used Bootstrap for the layout and for timer icons.
-- I used https://color.adobe.com/create/color-wheel to create a colorscheme, initially with the "split complimentary option", and then fine tuning until I was satisfied with the colors. I wanted a simple, minimalistic, but colorful app design, and took inspiration from different existing apps, as https://play.google.com/store/apps/details?id=cc.dreamspark.intervaltimer&hl=en.
-- I Have spent a lot of time DRY'ing the code, but I would like to refactor more, and maybe split some of the code into more components.
+- I have done my best to DRY the code, but I would like to refactor more, and maybe split some of the code into more components. I started off with a lot of the same code in each of the timers, but ended up creating an app where they all draw on a common timer component as most of the code was the same. I think you could make the case for both scenarios. Also, I have tried to pull out JS in the JSX to functions where it makes sense, but maybe there are a few places where it could still be tighter.
+- I have used the helper class as a common file for both colors, statements and functions. I was a bit in doubt as to what is the best practise with regard to having different files for different things - i.e. how granular you should get. Also, how I am not exactly sure what is the best practise for styled components when some components use the same classes - I have just kept it within the file of each component and used common things like colors from the helper file.
+- I have one big context, that gradually moved up during the project - this means, that most of my props have become obsolete.
+- With regard to design and UX, i opted for a simple version, where the user just start on the settings screen, and is directed back to that screen if the necessary options have not been set (apart from the stopwatch timer, which does not have any settings).
 
-https://prof-tejera.github.io/assignment-2-keamarg
+- As stated in A1:
+  -- I used Bootstrap for the layout and for timer icons.
+  -- I used https://color.adobe.com/create/color-wheel to create a colorscheme, initially with the "split complimentary option", and then fine tuning until I was satisfied with the colors. I wanted a simple, minimalistic, but colorful app design, and took inspiration from different existing apps, as https://play.google.com/store/apps/details?id=cc.dreamspark.intervaltimer&hl=en.
+
+Link to live version on GH pages: https://prof-tejera.github.io/assignment-2-keamarg
