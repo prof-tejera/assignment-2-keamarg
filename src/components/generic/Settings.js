@@ -20,11 +20,11 @@ const SetInput = styled.input`
   border: 0px;
 `;
 
-const Credentials = styled.p`
-  font-size: 0.8rem;
-  color: ${COLORS.text};
-  padding-top: 0.5rem;
-`;
+// const Credentials = styled.p`
+//   font-size: 0.8rem;
+//   color: ${COLORS.text};
+//   padding-top: 0.5rem;
+// `;
 
 const Text = styled.p`
   font-size: 1rem;
@@ -61,24 +61,22 @@ const Settings = (props) => {
 
   return (
     <div className="w-75">
-      {timerType !== TIMERS.stopwatch ? (
-        <>
-          <Text>
-            <label htmlFor="timer">Set workout time</label>
-            <br />
-            {timerValue(time)}
-          </Text>
-          <SetInput
-            name="timer"
-            type="range"
-            min="0"
-            max="7200"
-            step="15"
-            value={time}
-            onChange={handleChange}
-          ></SetInput>
-        </>
-      ) : null}
+      <>
+        <Text>
+          <label htmlFor="timer">Set workout time</label>
+          <br />
+          {timerValue(time)}
+        </Text>
+        <SetInput
+          name="timer"
+          type="range"
+          min="0"
+          max="7200"
+          step="10"
+          value={time}
+          onChange={handleChange}
+        ></SetInput>
+      </>
       {timerType === TIMERS.xy || timerType === TIMERS.tabata ? (
         <>
           <Text>
@@ -107,7 +105,7 @@ const Settings = (props) => {
           <SetInput
             name="rest"
             type="range"
-            min="0"
+            min="2"
             max="300"
             step="5"
             value={rest}
@@ -115,7 +113,7 @@ const Settings = (props) => {
           ></SetInput>
         </>
       ) : null}
-      <Credentials>By Martin Gundtoft</Credentials>
+      {/* <Credentials>By Martin Gundtoft</Credentials> */}
     </div>
   );
 };
